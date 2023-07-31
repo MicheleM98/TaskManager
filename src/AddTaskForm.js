@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useStore } from './store';
-import { Layout, Button, Space } from 'antd';
+import { Button, Space, Typography } from 'antd';
 import { CheckOutlined } from '@ant-design/icons';
 
 const AddTaskForm = () => {
@@ -8,7 +8,7 @@ const AddTaskForm = () => {
   const [description, setDescription] = useState('');
   const addTask = useStore((state) => state.addTask);
   const [size] = useState('large');
-  const { Sider, Content } = Layout;
+  const { Title } = Typography;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,21 +17,19 @@ const AddTaskForm = () => {
     setTitle('');
     setDescription('');
   };
+  const titleStyle = {
+    color: '#fff',
+    marginBottom: '0px',
+  }
   
   return (
     <form>
       <Space size={size} direction='vertical'>
-        <h2>Nuovo Task</h2>
-        <div>
-            <label>Titolo:</label>
-            <br />
-            <input type="text" placeholder='Inserisci un titolo' value={title} onChange={(e) => setTitle(e.target.value)} />
-        </div>
-        <div>
-            <label>Description:</label>
-            <br />
-            <input type="text" placeholder='Inserisci una descriscione' value={description} onChange={(e) => setDescription(e.target.value)} />
-        </div>
+        <Title level={3} style={titleStyle}>Nuovo Task</Title>
+        <Title level={4} style={titleStyle}>Titolo:</Title>
+        <input type="text" placeholder='Inserisci un titolo' value={title} onChange={(e) => setTitle(e.target.value)} />
+        <Title level={4} style={titleStyle}>Description:</Title>
+        <input type="text" placeholder='Inserisci una descriscione' value={description} onChange={(e) => setDescription(e.target.value)} />
         <Button onClick={handleSubmit}>Crea <CheckOutlined /></Button>
       </Space>
     </form>
