@@ -1,9 +1,11 @@
-import React from 'react';
-import { Button } from 'antd';
+import React, { useState } from 'react';
+import { Button, Space } from 'antd';
 import { useStore } from './store';
+import { CloseOutlined } from '@ant-design/icons';
 
 const Task = ({ task }) => {
   const deleteTask = useStore((state) => state.deleteTask);
+  const [size] = useState('large');
 
   const handleDelete = () => {
     deleteTask(task.id);
@@ -11,9 +13,11 @@ const Task = ({ task }) => {
 
   return (
     <div>
-      <h3>{task.title}</h3>
-      <p>{task.description}</p>
-      <Button danger onClick={handleDelete}>Delete</Button>
+      <Space size={size} direction='vertical'>
+        <h3>{task.title}</h3>
+        <p>{task.description}</p>
+        <Button danger onClick={handleDelete}>Elimina <CloseOutlined /></Button>
+      </Space>
     </div>
   );
 };
