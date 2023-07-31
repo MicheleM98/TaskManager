@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useStore } from './store';
-import { Button, Space } from 'antd';
+import { Layout, Button, Space } from 'antd';
+import { CheckOutlined } from '@ant-design/icons';
 
 const AddTaskForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const addTask = useStore((state) => state.addTask);
   const [size] = useState('large');
+  const { Sider, Content } = Layout;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +17,7 @@ const AddTaskForm = () => {
     setTitle('');
     setDescription('');
   };
-
+  
   return (
     <form>
       <Space size={size} direction='vertical'>
@@ -30,7 +32,7 @@ const AddTaskForm = () => {
             <br />
             <input type="text" placeholder='Inserisci una descriscione' value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
-        <Button onClick={handleSubmit}>Crea</Button>
+        <Button onClick={handleSubmit}>Crea <CheckOutlined /></Button>
       </Space>
     </form>
   );
